@@ -1,48 +1,7 @@
-#include "Selector.h"
-#include "Programmers.h"
-
-using S = Selector<IProgrammer*, ISwd*, IReport*>;
-
-S::TargetFunction Alias(const std::string& deviceName);
-
-const S::List selectors = 
-{
-  { "STM32F4",
-    { 
-      { "37",
-        { 
-          { "?G", {}, [](auto s, auto r) { return new CSTM32F4x7(s, r, 10, false); } },
-          { "?I", {}, [](auto s, auto r) { return new CSTM32F4x7(s, r, 20, true); } }
-        }
-      } 
-    }
-  },
-
-  { "SPC56",
-    { 
-       { "33", {}, [](auto s, auto r) { return new CSPC56(s, r, 5); } },
-       { "34", {}, [](auto s, auto r) { return new CSPC56(s, r, 10); } },
-       { "3M60", {}, Alias("SPC5633") },
-       { "3M64", {}, Alias("SPC5634") }
-    }
-  }
-};
-
-S::TargetFunction Alias(const std::string& deviceName)
-{
-  auto closure = [=](auto s, auto r) -> IProgrammer*
-  {
-    S::TargetFunction creator = S::Parse(selectors, deviceName);
-    return creator(s, r);
-  };
-
-  return closure;
-}
+#include "gtest/gtest.h"
 
 int main(int argc, char* argv[])
 {
-  auto fn = S::Parse(selectors, "SPC563M64");
-  auto p = fn(nullptr, nullptr);
-  p->Program();
-  return 0;
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }

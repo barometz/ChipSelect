@@ -1,0 +1,3 @@
+[submodule "ChipSelect/test/googletest"]
+	path = ChipSelect/test/googletest
+	url = https://github.com/google/googletest.git

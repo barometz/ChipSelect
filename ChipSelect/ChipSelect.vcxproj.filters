@@ -7,6 +7,15 @@
     <ClCompile Include="src\Selector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test\googletest\googletest\src\gtest-all.cc">
+      <Filter>Tests\gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="test\Empty.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test\Populated.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Selector.h">
@@ -24,6 +33,12 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{90786393-ab5e-4262-b768-4d621ea22938}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{0f28578f-1b75-47d0-9f1b-0611e0e4e187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\gtest">
+      <UniqueIdentifier>{0fa6dca0-64b0-4fae-9b30-f0fe852fabd1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -35,7 +35,10 @@ private:
       return {};
 
     if (selectors.empty())
-      return function;
+      if (function)
+        return function;
+      else
+        return {};
 
     const std::string remainingDeviceName = ConsumePrefix(prefix, deviceName);
     std::optional<TargetFunction> result{};
