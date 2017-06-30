@@ -15,61 +15,53 @@ class Selector
 {
 public:
   using TargetFunction = std::function<Result(Args...)>;
-  using List = std::vector<Selector<Result, Args...>>;
 
   // Selector description
   std::string prefix;
-  List selectors;
+  std::vector<Selector<Result, Args...>> nodes;
   TargetFunction function;
-  std::string alias;
 
-  static std::optional<TargetFunction> Parse(const List& selectors, const std::string& deviceName)
+  static std::optional<TargetFunction> 
+    Parse(const std::vector<Selector<Result, Args...>>& nodes, const std::string& deviceName)
   {
-    const Selector<Result, Args...> root = { "", selectors };
-    return root.ParseIt(selectors, deviceName);
+    const Selector<Result, Args...> root = { "", nodes };
+    return root.Parse(root, deviceName);
   }
 
-  static Result Alias(Args...)
+  class Alias
   {
-    return Result();
-  }
+  public:
+    Alias(const std::string& deviceName) : deviceName(deviceName) { }
+    Result operator()(Args...) const { return Result(); }
+    std::string deviceName;
+  };
 
 private:
-  std::optional<TargetFunction> ParseIt(const List& root, const std::string& deviceName) const
+  std::optional<TargetFunction> 
+    Parse(const Selector<Result, Args...>& root, const std::string& deviceName) const
   {
     if (!StartsWith(prefix, deviceName))
       return {};
 
-    if (selectors.empty())
+    if (nodes.empty())
     {
       if (function == nullptr)
-      {
         return {};
-      }
-      else if (function.target<Result(Args...)>() == Alias)
-      {
-        return Parse(root, alias);
-      }
-      else if (function)
-      {
-        return function;
-      }
+      else if (function.target<Alias>() != nullptr)
+        return root.Parse(root, function.target<Alias>()->deviceName);
       else
-      {
-        return {};
-      }
+        return function;
     }
 
     const std::string remainingDeviceName = ConsumePrefix(prefix, deviceName);
-    std::optional<TargetFunction> result{};
 
-    for (auto& s : selectors)
+    for (auto& s : nodes)
     {
-      result = s.ParseIt(root, remainingDeviceName);
+      auto result = s.Parse(root, remainingDeviceName);
       if (result)
-        break;
+        return result;
     }
 
-    return result;
+    return {};
   }
 };

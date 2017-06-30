@@ -5,7 +5,7 @@
 
 using S = Selector<IProgrammer*, ISwd*, IReport*>;
 
-const S::List selectors =
+const std::vector<S> selectors =
 {
   { "STM32F4",
     {
@@ -22,8 +22,8 @@ const S::List selectors =
     {
       { "33",{}, [](auto s, auto r) { return new CSPC56(s, r, 5); } },
       { "34",{}, [](auto s, auto r) { return new CSPC56(s, r, 10); } },
-      { "3M60",{}, S::Alias, "SPC5633" },
-      { "3M64",{}, S::Alias, "SPC5634" }
+      { "3M60",{}, S::Alias("SPC5633") },
+      { "3M64",{}, S::Alias("SPC5634") }
     }
   }
 };
