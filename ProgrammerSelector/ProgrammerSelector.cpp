@@ -11,48 +11,48 @@
 class ISwd;
 class IReport;
 
-Create Alias(const std::string& deviceName);
+using S = Selector<CProgrammer*, ISwd*, IReport*>;
 
-const std::vector<Selector> selectors = 
+S::Create Alias(const std::string& deviceName);
+
+const std::vector<S> selectors = 
 {
   { "STM32F4",
     { 
       { "37",
         { 
-          { "?G", {}, [](auto args) { return new CSTM32F4x7(args.Swd, args.Report, 10, false); } },
-          { "?I", {}, [](auto args) { return new CSTM32F4x7(args.Swd, args.Report, 20, true); } }
+          { "?G", {}, [](auto s, auto r) { return new CSTM32F4x7(s, r, 10, false); } },
+          { "?I", {}, [](auto s, auto r) { return new CSTM32F4x7(s, r, 20, true); } }
         }
       } 
     }
   },
 
-  {
-    "SPC56",
+  { "SPC56",
     { 
-       { "33", {}, [](auto args) { return new CSPC56(args.Swd, args.Report, 5); } },
-       { "34", {}, [](auto args) { return new CSPC56(args.Swd, args.Report, 10); } },
+       { "33", {}, [](auto s, auto r) { return new CSPC56(s, r, 5); } },
+       { "34", {}, [](auto s, auto r) { return new CSPC56(s, r, 10); } },
        { "3M60", {}, Alias("SPC5633") },
        { "3M64", {}, Alias("SPC5634") }
     }
   }
 };
 
-Create Alias(const std::string& deviceName)
+S::Create Alias(const std::string& deviceName)
 {
-  auto closure = [=](CreateArgs args) -> CProgrammer*
+  auto closure = [=](auto s, auto r) -> CProgrammer*
   {
-    Create creator = Selector::Parse(selectors, deviceName);
-    return creator(args);
+    S::Create creator = S::Parse(selectors, deviceName);
+    return creator(s, r);
   };
 
   return closure;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-  CreateArgs args = { nullptr, nullptr };
-  auto fn = Selector::Parse(selectors, "SPC563M64");
-  auto p = fn(args);
+  auto fn = S::Parse(selectors, "SPC563M64");
+  auto p = fn(nullptr, nullptr);
   p->Program();
   return 0;
 }
