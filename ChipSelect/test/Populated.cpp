@@ -28,17 +28,32 @@ const std::vector<S> selectors =
   }
 };
 
-TEST(Populated, ValidButTooShort)
+TEST(Lookup, Incomplete)
 {
   EXPECT_FALSE(S::Parse(selectors, "STM").has_value());
 }
 
-TEST(Populated, Valid)
+TEST(Lookup, Almost)
 {
-  EXPECT_TRUE(S::Parse(selectors, "STM32F437?I"));
+  EXPECT_FALSE(S::Parse(selectors, "SPC563M6").has_value());
 }
 
-TEST(Populated, Alias)
+TEST(Lookup, Simple)
 {
-  EXPECT_TRUE(S::Parse(selectors, "SPC563M60"));
+  EXPECT_TRUE(S::Parse(selectors, "SPC5633").has_value());
+}
+
+TEST(Lookup, Alias)
+{
+  EXPECT_TRUE(S::Parse(selectors, "SPC563M60").has_value());
+}
+
+TEST(Lookup, Wildcard)
+{
+  EXPECT_TRUE(S::Parse(selectors, "STM32F437VG"));
+}
+
+TEST(Lookup, Longer)
+{
+  EXPECT_TRUE(S::Parse(selectors, "STM32F437VGAH"));
 }

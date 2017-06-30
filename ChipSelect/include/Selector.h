@@ -13,9 +13,9 @@ template <typename Result, typename ...Args>
 // Selects from functions which take Args and return Result
 class Selector
 {
-public:
   using TargetFunction = std::function<Result(Args...)>;
 
+public:
   // Selector description
   std::string prefix;
   std::vector<Selector<Result, Args...>> nodes;
