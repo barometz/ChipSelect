@@ -30,7 +30,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{A94FC73D-5763-4C31-8D87-BEC9C513AD26}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ProgrammerSelector</RootNamespace>
+    <RootNamespace>ChipSelect</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ProjectName>ChipSelect</ProjectName>
   </PropertyGroup>
