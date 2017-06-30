@@ -1,6 +1,3 @@
-// ProgrammerSelector.cpp : Defines the entry point for the console application.
-//
-
 #include <iostream>
 
 #include "Selector.h"
@@ -11,9 +8,9 @@ class IReport;
 
 using S = Selector<CProgrammer*, ISwd*, IReport*>;
 
-S::Create Alias(const std::string& deviceName);
+S::TargetFunction Alias(const std::string& deviceName);
 
-const std::vector<S> selectors = 
+const S::List selectors = 
 {
   { "STM32F4",
     { 
@@ -36,11 +33,11 @@ const std::vector<S> selectors =
   }
 };
 
-S::Create Alias(const std::string& deviceName)
+S::TargetFunction Alias(const std::string& deviceName)
 {
   auto closure = [=](auto s, auto r) -> CProgrammer*
   {
-    S::Create creator = S::Parse(selectors, deviceName);
+    S::TargetFunction creator = S::Parse(selectors, deviceName);
     return creator(s, r);
   };
 
