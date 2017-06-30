@@ -5,8 +5,6 @@
 
 using S = Selector<IProgrammer*, ISwd*, IReport*>;
 
-S::TargetFunction Alias(const std::string& deviceName);
-
 const S::List selectors =
 {
   { "STM32F4",
@@ -24,27 +22,23 @@ const S::List selectors =
     {
       { "33",{}, [](auto s, auto r) { return new CSPC56(s, r, 5); } },
       { "34",{}, [](auto s, auto r) { return new CSPC56(s, r, 10); } },
-      { "3M60",{}, Alias("SPC5633") },
-      { "3M64",{}, Alias("SPC5634") }
+      { "3M60",{}, S::Alias, "SPC5633" },
+      { "3M64",{}, S::Alias, "SPC5634" }
     }
   }
 };
 
-S::TargetFunction Alias(const std::string& deviceName)
-{
-  auto closure = [=](auto s, auto r) -> IProgrammer*
-  {
-    std::optional<S::TargetFunction> creator = S::Parse(selectors, deviceName);
-    if (creator.has_value())
-      return creator.value()(s, r);
-    else
-      return nullptr;
-  };
-
-  return closure;
-}
-
-TEST(Populated, ValidButShort)
+TEST(Populated, ValidButTooShort)
 {
   EXPECT_FALSE(S::Parse(selectors, "STM").has_value());
+}
+
+TEST(Populated, Valid)
+{
+  EXPECT_TRUE(S::Parse(selectors, "STM32F437?I"));
+}
+
+TEST(Populated, Alias)
+{
+  EXPECT_TRUE(S::Parse(selectors, "SPC563M60"));
 }
