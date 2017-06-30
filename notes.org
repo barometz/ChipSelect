@@ -1,0 +1,61 @@
+#+TITLE: Generic device selection
+
+* Premise
+  - A programmer supports many devices.
+  - The programmer uses many device-specific IProgrammer implementations
+  - The name of the device is used to select the correct implementation
+  - Device names typically follow a more or less hierarchical structure
+  - Some part in the middle of a device name may not be relevant, e.g. package spec
+* Hierarchy sample:
+  - SPC5
+    - SPC563
+      - SPC5633
+      - SPC5634
+      - SPC563M60
+      - SPC563M64
+  - STM32F
+    - STM32F1
+      - STM32F103
+    - STM32F2
+      - STM32F207
+      - STM32F217
+    - STM32F3
+    - STM32F4
+      - STM32F407
+      - STM32F417
+      - STM32F437
+        - STM32F437?G
+        - STM32F437?I
+* Relevant properties
+  - Device family
+  - Specific series
+  - Size
+  - Occasionally a hint about memory organization
+* Procedure
+  - Start with a list of ^selectors
+  - For each selector:
+    - If the selector starts with one or more "?":
+      - Discard that many 
+  - Find the longest match, e.g. STM32F precedes STM
+  - If this is a final match, create the associated implementation
+  - If it is not a final match, discard the prefix and repeat for the match's sub-prefixes
+* Structure "Selector"
+  - Prefix: Zero or more "?" followed by one or more alphanumeric.
+  - Next: one of..
+    - fn(ISwd, IReport, BaseClockHz, SParams) -> CProgrammer
+    - One or more of Selector
+  - Empty selector list indicates final?
+
+* Further thoughts
+  - If a selector is valid as both a complete selector (has a Create function attached) and as a continued selector (has further Selector attached), then failing matches on subselectors might lead to traversing up the tree again? e.g...
+    - STM32F4
+      - Selectors:
+        - 37
+          - Selectors: none
+          - CSTM32F437(..)
+        - 39
+          - Selectors: none
+          - CSTM32F439(..)
+      - CSTMF4xxx(...)
+  - Sub-selectors share a lot of commonalities between them. Same partial IDs, often return the same class, frequently the only difference is a size parameter. This whole thing would be more useful if it allowed for some sort of currying, or at least shared parameters between sibling selectors.
+  - Maybe don't give precedence to the longest match, but to the first match? Simpler, faster, more readable.
