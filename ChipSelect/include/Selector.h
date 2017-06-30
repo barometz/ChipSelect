@@ -21,11 +21,10 @@ public:
   List selectors;
   TargetFunction function;
 
-  static TargetFunction Parse(const List& selectors, const std::string& deviceName)
+  static std::optional<TargetFunction> Parse(const List& selectors, const std::string& deviceName)
   {
     const Selector<Result, Args...> root = { "", selectors };
-    std::optional<TargetFunction> result = root.Parse(deviceName);
-    return result.value_or(Dummy);
+    return root.Parse(deviceName);
   }
 
 private:
@@ -51,10 +50,5 @@ private:
     }
 
     return result;
-  }
-
-  static Result Dummy(Args...)
-  {
-    return Result();
   }
 };

@@ -34,8 +34,11 @@ S::TargetFunction Alias(const std::string& deviceName)
 {
   auto closure = [=](auto s, auto r) -> IProgrammer*
   {
-    S::TargetFunction creator = S::Parse(selectors, deviceName);
-    return creator(s, r);
+    std::optional<S::TargetFunction> creator = S::Parse(selectors, deviceName);
+    if (creator.has_value())
+      return creator.value()(s, r);
+    else
+      return nullptr;
   };
 
   return closure;
@@ -43,5 +46,5 @@ S::TargetFunction Alias(const std::string& deviceName)
 
 TEST(Populated, ValidButShort)
 {
-  EXPECT_NE(nullptr, S::Parse(selectors, "STM"));
+  EXPECT_FALSE(S::Parse(selectors, "STM").has_value());
 }
