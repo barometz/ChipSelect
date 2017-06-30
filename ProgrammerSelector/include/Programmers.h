@@ -5,16 +5,16 @@
 class ISwd;
 class IReport;
 
-class CProgrammer
+class IProgrammer
 {
 public:
   virtual bool Program() = 0;
 
 protected:
-  virtual ~CProgrammer() {}
+  virtual ~IProgrammer() {}
 };
 
-class CSTM32F4x7 : public CProgrammer
+class CSTM32F4x7 : public IProgrammer
 {
 public:
   CSTM32F4x7(ISwd* swd, IReport* report, int size, bool dualBank)
@@ -36,7 +36,7 @@ private:
   bool mDualBank;
 };
 
-class CSPC56 : public CProgrammer
+class CSPC56 : public IProgrammer
 {
 public:
   CSPC56(ISwd* swd, IReport* report, int size)

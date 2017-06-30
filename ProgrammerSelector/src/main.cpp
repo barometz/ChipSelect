@@ -1,12 +1,7 @@
-#include <iostream>
-
 #include "Selector.h"
 #include "Programmers.h"
 
-class ISwd;
-class IReport;
-
-using S = Selector<CProgrammer*, ISwd*, IReport*>;
+using S = Selector<IProgrammer*, ISwd*, IReport*>;
 
 S::TargetFunction Alias(const std::string& deviceName);
 
@@ -35,7 +30,7 @@ const S::List selectors =
 
 S::TargetFunction Alias(const std::string& deviceName)
 {
-  auto closure = [=](auto s, auto r) -> CProgrammer*
+  auto closure = [=](auto s, auto r) -> IProgrammer*
   {
     S::TargetFunction creator = S::Parse(selectors, deviceName);
     return creator(s, r);

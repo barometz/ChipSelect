@@ -8,13 +8,13 @@
 bool StartsWith(const std::string& prefix, const std::string& query);
 std::string ConsumePrefix(const std::string& prefix, const std::string& query);
 
-template <typename Result, typename ...CreateArgs>
-// Selects from functions which take CreateArgs and return Result
+template <typename Result, typename ...Args>
+// Selects from functions which take Args and return Result
 class Selector
 {
 public:
-  using TargetFunction = std::function<Result(CreateArgs...)>;
-  using List = std::vector<Selector<Result, CreateArgs...>>;
+  using TargetFunction = std::function<Result(Args...)>;
+  using List = std::vector<Selector<Result, Args...>>;
 
   // Selector description
   std::string prefix;
@@ -23,7 +23,7 @@ public:
 
   static TargetFunction Parse(const List& selectors, const std::string& deviceName)
   {
-    const Selector<Result, CreateArgs...> root = { "", selectors };
+    const Selector<Result, Args...> root = { "", selectors };
     std::optional<TargetFunction> result = root.Parse(deviceName);
     return result.value_or(Dummy);
   }
@@ -50,7 +50,7 @@ private:
     return result;
   }
 
-  static Result Dummy(CreateArgs...)
+  static Result Dummy(Args...)
   {
     return Result();
   }
