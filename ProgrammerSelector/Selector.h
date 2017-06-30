@@ -5,8 +5,16 @@
 #include <vector>
 
 class CProgrammer;
+class ISwd;
+class IReport;
 
-typedef std::function<CProgrammer*(int)> Create;
+struct CreateArgs
+{
+  ISwd* Swd;
+  IReport* Report;
+};
+
+typedef std::function<CProgrammer*(CreateArgs)> Create;
 
 class Selector
 {
@@ -16,6 +24,5 @@ public:
   std::vector<Selector> selectors;
   Create function;
 
-  Create Parse(const std::string& deviceName) const;
+  static Create Parse(const std::vector<Selector>& selectors, const std::string& deviceName);
 };
-
