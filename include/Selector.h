@@ -6,8 +6,7 @@
 #include <string>
 #include <vector>
 
-bool StartsWith(const std::string& prefix, const std::string& query);
-std::string ConsumePrefix(const std::string& prefix, const std::string& query);
+#include "StringTools.h"
 
 template <typename Result, typename ...Args>
 // Selects from functions which take Args and return Result

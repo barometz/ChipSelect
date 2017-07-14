@@ -12,10 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Selector.h" />
+    <ClInclude Include="..\include\StringTools.h" />
     <ClInclude Include="..\test\Programmers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Selector.cpp" />
+    <ClCompile Include="..\src\StringTools.cpp" />
     <ClCompile Include="..\test\Empty.cpp" />
     <ClCompile Include="..\test\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\test\main.cpp" />
