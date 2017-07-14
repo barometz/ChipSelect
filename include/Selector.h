@@ -46,11 +46,23 @@ private:
     if (nodes.empty())
     {
       if (function == nullptr)
+      {
         return {};
-      else if (function.target<Alias>() != nullptr)
-        return root.Parse(root, function.target<Alias>()->deviceName);
+      }
       else
-        return function;
+      {
+        auto target = function.template target<Alias>();
+        if (target != nullptr)
+        {
+          // function is an Alias
+          return root.Parse(root, target->deviceName);
+        }
+        else
+        {
+          // function is a complete target
+          return function;
+        }
+      }
     }
 
     const std::string remainingDeviceName = ConsumePrefix(prefix, deviceName);
