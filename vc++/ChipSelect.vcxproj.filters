@@ -47,4 +47,10 @@
       <UniqueIdentifier>{39ba17d8-9410-4202-b447-601fe6f77367}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\LICENSE.txt" />
+  </ItemGroup>
 </Project>
