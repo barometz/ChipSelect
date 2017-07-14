@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="..\src\Selector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Selector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="test\googletest\googletest\src\gtest-all.cc">
+    <ClCompile Include="..\test\googletest\googletest\src\gtest-all.cc">
       <Filter>Tests\gtest</Filter>
     </ClCompile>
-    <ClCompile Include="test\Empty.cpp">
+    <ClCompile Include="..\test\main.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="test\Populated.cpp">
-      <Filter>Tests</Filter>
+    <ClCompile Include="..\test\Populated.cpp">
+      <Filter>Tests\Test cases</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\Empty.cpp">
+      <Filter>Tests\Test cases</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Selector.h">
+    <ClInclude Include="..\include\Selector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="test\Programmers.h">
-      <Filter>Tests</Filter>
+    <ClInclude Include="..\test\Programmers.h">
+      <Filter>Tests\Test cases</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +39,9 @@
     </Filter>
     <Filter Include="Tests\gtest">
       <UniqueIdentifier>{0fa6dca0-64b0-4fae-9b30-f0fe852fabd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Test cases">
+      <UniqueIdentifier>{39ba17d8-9410-4202-b447-601fe6f77367}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
