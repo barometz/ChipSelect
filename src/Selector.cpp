@@ -7,6 +7,8 @@ bool StartsWith(const std::string& prefix, const std::string& query)
 
   if (prefix[0] == '?' && query.length() > 0)
   {
+    // If the prefix starts with a wildcard "?", drop the first character from
+    // prefix and query and start over
     return StartsWith(prefix.substr(1), query.substr(1));
   }
 
@@ -18,5 +20,5 @@ std::string ConsumePrefix(const std::string& prefix, const std::string& query)
   if (StartsWith(prefix, query))
     return query.substr(prefix.length());
   else
-    return query;
+    throw std::invalid_argument(query + " does not start with prefix " + prefix);
 }
