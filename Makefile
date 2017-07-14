@@ -12,7 +12,8 @@ IMPL_SOURCES := $(wildcard src/*.cpp)
 IMPL_HEADERS := $(wildcard include/*.h)
 IMPL_OBJS := $(patsubst %.cpp,%.o,$(IMPL_SOURCES))
 GTEST_OBJS := $(GTEST_PATH)/src/gtest-all.o
-TEST_OBJS := $(patsubst %.cpp,%.o,$(wildcard test/*.cpp))
+TEST_SOURCES := $(wildcard test/*.cpp)
+TEST_OBJS := $(patsubst %.cpp,%.o,$(TEST_SOURCES))
 
 .PHONY: clean clean_all
 
