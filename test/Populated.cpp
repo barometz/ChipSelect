@@ -23,8 +23,8 @@ const std::vector<S> selectors =
     {
       { "33",{}, [](auto s, auto r) { return new CSPC56(s, r, 5); } },
       { "34",{}, [](auto s, auto r) { return new CSPC56(s, r, 10); } },
-      { "3M60",{}, S::Alias("SPC5633") },
-      { "3M64",{}, S::Alias("SPC5634") }
+      { "3M60",{}, S::Alias{"SPC5633"} },
+      { "3M64",{}, S::Alias{"SPC5634"} }
     },
     [](auto s, auto r) { return new CSPC56(s, r, 0); }
   }

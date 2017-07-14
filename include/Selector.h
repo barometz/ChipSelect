@@ -31,8 +31,8 @@ public:
   class Alias
   {
   public:
-    Alias(const std::string& query) : query(query) { }
     Result operator()(Args...) const { return Result(); }
+
     std::string query;
   };
 
@@ -41,26 +41,20 @@ public:
     Parse(const std::vector<Selector<Result, Args...>>& nodes, const std::string& query)
   {
     const Selector<Result, Args...> root = { "", nodes };
-    auto targetFunction = root.Parse(query);
+    std::optional<TargetFunction> targetFunction = root.Parse(query);
 
-    if (!targetFunction)
-    {
-      return targetFunction;
-    }
-    else
+    if (targetFunction)
     {
       const Alias* alias = targetFunction->template target<Alias>();
-      if (alias == nullptr)
+      if (alias != nullptr)
       {
-        // Result does not resolve as an Alias, so it's a final result
-        return targetFunction;
-      }
-      else
-      {
-        // Result resolves as an Alias, so start again
+        // Result is an Alias, so start from the top
         return Parse(nodes, alias->query);
       }
     }
+    
+    // Result is either empty or not an Alias, so return it.
+    return targetFunction;
   }
 
 private:
@@ -69,7 +63,7 @@ private:
     if (!StartsWith(prefix, query))
       return {};
 
-    // Child nodes available, so descend
+    // Assume child nodes are available and attempt to descend
     const std::string remainingQuery = ConsumePrefix(prefix, query);
 
     for (auto& node : childNodes)
