@@ -8,6 +8,9 @@
 
 #include "StringTools.h"
 
+namespace ChipSelect
+{
+
 template <typename Result, typename ...Args>
 // Selects from functions which take Args and return Result
 class Selector
@@ -75,3 +78,5 @@ private:
     return function;
   }
 };
+
+}  // namespace ChipSelect

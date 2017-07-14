@@ -4,7 +4,7 @@
 
 #include "Programmers.h"
 
-using S = Selector<IProgrammer*, IDigitalIO*, ILogger*>;
+using S = ChipSelect::Selector<IProgrammer*, IDigitalIO*, ILogger*>;
 
 const std::vector<S> selectors =
 {

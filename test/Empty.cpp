@@ -2,7 +2,7 @@
 
 #include "Selector.h"
 
-using S = Selector<int>;
+using S = ChipSelect::Selector<int>;
 
 class Empty : public testing::Test, public testing::WithParamInterface<std::tuple<std::string, std::vector<S>>>
 {

@@ -1,5 +1,8 @@
 #include "StringTools.h"
 
+namespace ChipSelect
+{
+
 bool StartsWith(const std::string& prefix, const std::string& query)
 {
   if (prefix.length() == 0)
@@ -22,3 +25,5 @@ std::string ConsumePrefix(const std::string& prefix, const std::string& query)
   else
     throw std::invalid_argument(query + " does not start with prefix " + prefix);
 }
+
+}  // namespace ChipSelect
