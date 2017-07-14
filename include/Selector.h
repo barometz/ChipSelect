@@ -69,24 +69,16 @@ private:
     if (!StartsWith(prefix, query))
       return {};
 
-    if (childNodes.empty())
-    {
-      // Reached a leaf of the tree
-      return function;
-    }
-    else
-    {
-      // Child nodes available, so descend
-      const std::string remainingQuery = ConsumePrefix(prefix, query);
+    // Child nodes available, so descend
+    const std::string remainingQuery = ConsumePrefix(prefix, query);
 
-      for (auto& node : childNodes)
-      {
-        auto result = node.Parse(remainingQuery);
-        if (result)
-          return result;
-      }
-
-      return {};
+    for (auto& node : childNodes)
+    {
+      auto result = node.Parse(remainingQuery);
+      if (result)
+        return result;
     }
+
+    return function;
   }
 };

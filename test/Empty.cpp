@@ -14,7 +14,7 @@ TEST_P(Empty, NoResult)
   std::string query;
   std::vector<S> tree;
   std::tie(query, tree) = GetParam();
-  EXPECT_FALSE(S::Parse(tree, query).has_value());
+  EXPECT_FALSE(S::Parse(tree, query));
 }
 
 const std::string queries[] = { "", "Pointless query", "???????" };
