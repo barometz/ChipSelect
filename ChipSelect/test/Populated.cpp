@@ -1,9 +1,10 @@
 #include "gtest/gtest.h"
 
 #include "Selector.h"
+
 #include "Programmers.h"
 
-using S = Selector<IProgrammer*, ISwd*, IReport*>;
+using S = Selector<IProgrammer*, IDigitalIO*, ILogger*>;
 
 const std::vector<S> selectors =
 {

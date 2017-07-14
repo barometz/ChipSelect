@@ -21,8 +21,8 @@
     <ClInclude Include="include\Selector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Programmers.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="test\Programmers.h">
+      <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-class ISwd;
-class IReport;
+class IDigitalIO;
+class ILogger;
 
 class IProgrammer
 {
@@ -17,7 +17,7 @@ protected:
 class CSTM32F4x7 : public IProgrammer
 {
 public:
-  CSTM32F4x7(ISwd* swd, IReport* report, int size, bool dualBank)
+  CSTM32F4x7(IDigitalIO* swd, ILogger* report, int size, bool dualBank)
     : mSwd(swd), mReport(report), mSize(size), mDualBank(dualBank)
   {
     std::cout << "Created F437 with size=" << size << std::endl;
@@ -30,8 +30,8 @@ public:
   }
 
 private:
-  ISwd* mSwd;
-  IReport* mReport;
+  IDigitalIO* mSwd;
+  ILogger* mReport;
   int mSize;
   bool mDualBank;
 };
@@ -39,7 +39,7 @@ private:
 class CSPC56 : public IProgrammer
 {
 public:
-  CSPC56(ISwd* swd, IReport* report, int size)
+  CSPC56(IDigitalIO* swd, ILogger* report, int size)
     : mSwd(swd), mReport(report), mSize(size)
   {
 
@@ -52,7 +52,7 @@ public:
   }
 
 private:
-  ISwd* mSwd;
-  IReport* mReport;
+  IDigitalIO* mSwd;
+  ILogger* mReport;
   int mSize;
 };

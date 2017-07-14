@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Programmers.h" />
     <ClInclude Include="include\Selector.h" />
+    <ClInclude Include="test\Programmers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
