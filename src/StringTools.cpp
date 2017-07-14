@@ -1,5 +1,7 @@
 #include "StringTools.h"
 
+#include <stdexcept>
+
 namespace ChipSelect
 {
 
