@@ -2,7 +2,7 @@
 
 ChipSelect is a small library that can help a factory method select specific implementations based on a query string. It was inspired by a recurring pattern encountered while building flash memory programmers, which often have more or less hierarchical naming patterns:
 
-*  **STM** indicates the vendor ST Microelectronics
+* **STM** indicates the vendor ST Microelectronics
   * **STM32** are 32-bit microcontrollers by ST
     * **STM32F1** is a family of devices with similar programming interfaces
 	* **STM32F4** is a family of devices with similar programming interfaces
@@ -41,7 +41,7 @@ const std::vector<S> selectors =
 
 ReturnValue Create(const std::string& query, ArgType1 one, ArgType2 two)
 {
-	std::optional<std::function<ReturnValue(Argument1, Argument2)> result = S::Parse("STM32F103");
+	std::optional<std::function<ReturnValue(ArgType1, ArgType2)> result = S::Parse("STM32F103");
 	if (result)
 	{
 		auto createFunction = result.value();
