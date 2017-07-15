@@ -1,4 +1,4 @@
-# ChipSelect
+# ChipSelect [![Build status](https://ci.appveyor.com/api/projects/status/v1rdc1q026lc2vf6?svg=true)](https://ci.appveyor.com/project/barometz/chipselect)
 
 * [Usage](README.md#usage)
 * [Building](README.md#building)
