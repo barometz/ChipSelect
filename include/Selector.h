@@ -9,18 +9,21 @@
 namespace ChipSelect
 {
 
+template<class Function> class Selector;
+
 template <typename Result, typename ...Args>
 // Selects from functions which take Args and return Result
-class Selector
+class Selector<Result(Args...)>
 {
   using TargetFunction = std::function<Result(Args...)>;
+  using MyT = Selector<Result(Args...)>;
 
 public:
   // Selector description
   // The (partial) name this node should match on
   std::string prefix;
   // Optional sub-selectors
-  std::vector<Selector<Result, Args...>> childNodes;
+  std::vector<MyT> childNodes;
   // Callable matching f(Args...) -> Result. If this node is a leaf node, 
   // function is Either a target function, i.e. a result from the parse tree, 
   // or an Alias
@@ -38,9 +41,9 @@ public:
 
   // Top-level parse function
   static std::optional<TargetFunction> 
-    Parse(const std::vector<Selector<Result, Args...>>& nodes, const std::string& query)
+    Parse(const std::vector<MyT>& nodes, const std::string& query)
   {
-    const Selector<Result, Args...> root = { "", nodes };
+    const MyT root = { "", nodes };
     const std::optional<TargetFunction> targetFunction = root.Parse(query);
 
     if (targetFunction)

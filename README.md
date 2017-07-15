@@ -28,7 +28,9 @@ The selection tree is defined by nodes with three attributes each: a query strin
 ```C++
 #include "Selector.h"
 
-using S = ChipSelect::Selector<ReturnValue, ArgType1, ArgType2>;
+// S is used to select a function which takes two arguments of type ArgType1 and 
+// ArgType2 and returns ReturnValue
+using S = ChipSelect::Selector<ReturnValue(ArgType1, ArgType2)>;
 
 const std::vector<S> selectors = 
 {
