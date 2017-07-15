@@ -7,4 +7,3 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-7
-      
