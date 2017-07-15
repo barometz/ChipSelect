@@ -37,6 +37,6 @@ $(TARGET): $(IMPL_OBJS) $(GTEST_OBJS) $(TEST_OBJS)
 $(IMPL_OBJS): $(IMPL_HEADERS)
 
 $(GTEST_OBJS): CPPFLAGS += -I$(GTEST_PATH)/include -I$(GTEST_PATH)
-$(TEST_OBJS): CPPFLAGS += -Itest -I$(GTEST_PATH)/include
+$(TEST_OBJS): CPPFLAGS += -I. -I$(GTEST_PATH)/include
 $(TEST_OBJS): CXXFLAGS += -Wno-missing-field-initializers
 $(TEST_OBJS): $(IMPL_HEADERS)

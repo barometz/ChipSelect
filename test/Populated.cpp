@@ -2,7 +2,7 @@
 
 #include "Selector.h"
 
-#include "Programmers.h"
+#include "test/Programmers.h"
 
 using S = ChipSelect::Selector<IProgrammer*, IDigitalIO*, ILogger*>;
 
