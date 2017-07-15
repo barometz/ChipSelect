@@ -1,9 +1,7 @@
 #pragma once
 
 #include <functional>
-#include <iostream>
 #include <optional>
-#include <string>
 #include <vector>
 
 #include "StringTools.h"
@@ -43,7 +41,7 @@ public:
     Parse(const std::vector<Selector<Result, Args...>>& nodes, const std::string& query)
   {
     const Selector<Result, Args...> root = { "", nodes };
-    std::optional<TargetFunction> targetFunction = root.Parse(query);
+    const std::optional<TargetFunction> targetFunction = root.Parse(query);
 
     if (targetFunction)
     {
@@ -70,7 +68,7 @@ private:
 
     for (auto& node : childNodes)
     {
-      auto result = node.Parse(remainingQuery);
+      const auto result = node.Parse(remainingQuery);
       if (result)
         return result;
     }
