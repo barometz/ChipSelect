@@ -11,4 +11,4 @@ addons:
     packages:
       - g++-7
 
-script: scons && out/ChipSelect_test
+script: scons && scons test

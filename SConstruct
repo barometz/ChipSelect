@@ -44,4 +44,8 @@ for key in objects.keys():
 
 Default(target)
 
-env.Program(target, objects_)
+build = env.Program(target, objects_)
+
+test = env.Command('test', None, target)
+AlwaysBuild(test)
+Depends(test, build)
