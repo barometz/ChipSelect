@@ -38,14 +38,15 @@ for key in sources.keys():
 
 NoClean(objects['gtest'])
 
-objects_ = list()
+objects_flat = list()
 for key in objects.keys():
-    objects_ += objects[key]
+    objects_flat += objects[key]
 
-Default(target)
-
-build = env.Program(target, objects_)
-
+# Top-level targets
+build = env.Program(target, objects_flat)
 test = env.Command('test', None, target)
+
 AlwaysBuild(test)
 Depends(test, build)
+
+Default(build)
