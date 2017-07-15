@@ -1,0 +1,19 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+before_build:
+- cmd: git submodule update --init --recursive
+build:
+  project: ChipSelect.sln
+  verbosity: minimal
+test_script:
+- ps: >-
+    # run tests
+
+    x64\Debug\ChipSelect_test.exe --gtest_output=xml:TestResult.xml
+
+
+    # upload results to AppVeyor
+
+    $wc = New-Object 'System.Net.WebClient'
+
+    $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestResult.xml))
