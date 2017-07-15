@@ -1,4 +1,4 @@
-# ChipSelect [![Build status](https://ci.appveyor.com/api/projects/status/v1rdc1q026lc2vf6?svg=true)](https://ci.appveyor.com/project/barometz/chipselect)
+# ChipSelect [![VC++ build status](https://ci.appveyor.com/api/projects/status/v1rdc1q026lc2vf6?svg=true)](https://ci.appveyor.com/project/barometz/chipselect) [![g++ build status](https://travis-ci.org/barometz/ChipSelect.svg?branch=master)](https://travis-ci.org/barometz/ChipSelect)
 
 * [Usage](README.md#usage)
 * [Building](README.md#building)
