@@ -1,4 +1,6 @@
-# ChipSelect [![VC++ build status](https://ci.appveyor.com/api/projects/status/v1rdc1q026lc2vf6?svg=true)](https://ci.appveyor.com/project/barometz/chipselect) [![g++ build status](https://travis-ci.org/barometz/ChipSelect.svg?branch=master)](https://travis-ci.org/barometz/ChipSelect)
+# ChipSelect 
+[![VC++ build status](https://ci.appveyor.com/api/projects/status/v1rdc1q026lc2vf6?svg=true)](https://ci.appveyor.com/project/barometz/chipselect) 
+[![g++ build status](https://travis-ci.org/barometz/ChipSelect.svg?branch=master)](https://travis-ci.org/barometz/ChipSelect)
 
 * [Usage](README.md#usage)
 * [Building](README.md#building)
@@ -30,31 +32,31 @@ using S = ChipSelect::Selector<ReturnValue, ArgType1, ArgType2>;
 
 const std::vector<S> selectors = 
 {
-	{
-		"AL8"
-	},
-	{
-		"AL32",
-		{
-			"T1",
-			{ "03", {}, [](auto a1, auto a2) { return CAL32T10x(a1, a2, 5); } },
-			{ "05", {}, [](auto a1, auto a2) { return CAL32T10x(a1, a2, 10); } }
-		}
-	}
+  {
+    "AL8"
+  },
+  {
+    "AL32",
+    {
+      "T1",
+      { "03", {}, [](auto a1, auto a2) { return CAL32T10x(a1, a2, 5); } },
+      { "05", {}, [](auto a1, auto a2) { return CAL32T10x(a1, a2, 10); } }
+    }
+  }
 };
 
 ReturnValue Create(const std::string& query, ArgType1 one, ArgType2 two)
 {
-	std::optional<std::function<ReturnValue(ArgType1, ArgType2)> result = S::Parse("STM32F103");
-	if (result)
-	{
-		auto createFunction = result.value();
-		return createFunction(one, two);
-	}
-	else
-	{
-		/* return a default */
-	}
+  std::optional<std::function<ReturnValue(ArgType1, ArgType2)> result = S::Parse(query);
+  if (result)
+  {
+    auto createFunction = result.value();
+    return createFunction(one, two);
+  }
+  else
+  {
+    /* return a default */
+  }
 }
 ```
 
@@ -63,10 +65,9 @@ There is also support for:
 * **Aliases**, because sometimes a name changes and both can be used for the same goal
 * **Fallback results** to provide generic solutions when the more specific ones don't match
 
-For more details, see tests/Populated.cpp.
+For more details, see [the tests](test/Populated.cpp).
 
 ## Building
-
-ChipSelect requires C++17 and is been tested with g++ 7.1.0 (`--std=c++1z`) as well as MSVC++ 14.1/VS 2017 (`/std:c++latest`).
+ChipSelect requires C++17 and is been tested with g++ 7.1.0 (`--std=c++1z`) as well as MSVC++ 14.1/VS 2017 (`/std:c++latest`). On Linux, it builds with SCons.
 
 To include it in your project, you only need the `src/` and `include/` folders. Most of the heavy lifting is done in `Selector.h`; you can  turn it into a header-only library by copying the definitions from `StringTools.cpp` into `StringTools.h` and inlining them.
