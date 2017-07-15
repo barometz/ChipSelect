@@ -1,7 +1,7 @@
 # ChipSelect
 
-* [](#Usage)
-* [](#Building)
+* [Usage](README.md#usage)
+* [Building](README.md#building)
 
 ChipSelect is a small library that can help a factory method select specific implementations based on a query string. It was inspired by a recurring pattern encountered while building flash memory programmers, which often have more or less hierarchical naming patterns:
 
