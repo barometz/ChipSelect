@@ -1,7 +1,8 @@
-language: cpp
-compiler: gcc
 os: linux
 dist: trusty
+
+language: cpp
+compiler: gcc
 
 addons:
   apt:
@@ -9,3 +10,5 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-7
+
+script: make && make test

@@ -15,7 +15,7 @@ GTEST_OBJS := $(GTEST_PATH)/src/gtest-all.o
 TEST_SOURCES := $(wildcard test/*.cpp)
 TEST_OBJS := $(patsubst %.cpp,%.o,$(TEST_SOURCES))
 
-.PHONY: clean clean_all
+.PHONY: clean clean_all test
 
 all: $(TARGET)
 
@@ -26,6 +26,9 @@ clean:
 
 clean_all: clean
 	rm -f $(GTEST_OBJS)
+
+test: $(TARGET)
+	$(TARGET)
 
 $(TARGET): $(IMPL_OBJS) $(GTEST_OBJS) $(TEST_OBJS)
 	mkdir -p $(dir $@)
